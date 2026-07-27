@@ -1,0 +1,449 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login Page</title>
+		<style>
+			:root {
+				--bg-1: #0f172a;
+				--bg-2: #1e293b;
+				--panel: rgba(15, 23, 42, 0.78);
+				--panel-border: rgba(255, 255, 255, 0.12);
+				--text: #e2e8f0;
+				--muted: #94a3b8;
+				--accent: #38bdf8;
+				--accent-strong: #0ea5e9;
+			}
+
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			@keyframes turbospin {
+				0% {
+					transform: rotate(0deg);
+					/* transform: scale(1.2); */
+				}
+				100% {
+					transform: rotate(360deg);
+					/* transform: scale(0.4); */
+				}
+			}
+
+			body {
+				min-height: 100vh;
+				font-family: Verdana, sans-serif;
+				color: var(--text);
+				background:
+					radial-gradient(circle at top left, rgba(56, 189, 248, 0.28), transparent 35%),
+					radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.18), transparent 32%),
+					linear-gradient(135deg, var(--bg-1), var(--bg-2));
+				display: grid;
+				place-items: center;
+				padding: 24px;
+			}
+
+			.login-shell:hover{
+				animation: turbospin .1s linear infinite;
+			}
+
+			.login-shell {
+				width: min(100%, 980px);
+				min-height: 620px;
+				border: 1px solid var(--panel-border);
+				border-radius: 28px;
+				overflow: hidden;
+				display: grid;
+				grid-template-columns: 1.1fr 0.9fr;
+				background: rgba(15, 23, 42, 0.42);
+				box-shadow: 0 24px 80px rgba(2, 6, 23, 0.45);
+				backdrop-filter: blur(18px);
+			}
+
+			.hero {
+				position: relative;
+				padding: 48px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				background:
+					linear-gradient(180deg, rgba(56, 189, 248, 0.22), rgba(15, 23, 42, 0.08)),
+					url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+			}
+
+			.hero::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(180deg, rgba(2, 6, 23, 0.18), rgba(2, 6, 23, 0.7));
+			}
+
+			.hero > * {
+				position: relative;
+				z-index: 1;
+			}
+
+			.brand {
+				display: inline-flex;
+				align-items: center;
+				gap: 12px;
+				font-size: 0.95rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: #f8fafc;
+			}
+
+			.brand-mark {
+				width: 42px;
+				height: 42px;
+				border-radius: 14px;
+				background: linear-gradient(135deg, var(--accent), #a5f3fc);
+				box-shadow: 0 10px 25px rgba(14, 165, 233, 0.32);
+			}
+
+			.hero-copy {
+				max-width: 460px;
+			}
+
+			.hero-copy h1 {
+				font-size: clamp(2.4rem, 4vw, 4.3rem);
+				line-height: 1.02;
+				margin-bottom: 18px;
+				color: #fff;
+			}
+
+			.hero-copy p {
+				font-size: 1.02rem;
+				line-height: 1.7;
+				color: rgba(226, 232, 240, 0.9);
+				max-width: 34ch;
+			}
+
+			.hero-badges {
+				display: flex;
+				gap: 12px;
+				flex-wrap: wrap;
+				margin-top: 28px;
+			}
+
+			.badge {
+				padding: 10px 14px;
+				border-radius: 999px;
+				background: rgba(15, 23, 42, 0.48);
+				border: 1px solid rgba(255, 255, 255, 0.16);
+				color: #f8fafc;
+				font-size: 0.9rem;
+			}
+
+			.login-card {
+				background: var(--panel);
+				padding: 48px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				border-left: 1px solid var(--panel-border);
+			}
+
+			.login-card h2 {
+				font-size: 2rem;
+				margin-bottom: 10px;
+			}
+
+			.login-card .subtitle {
+				color: var(--muted);
+				margin-bottom: 30px;
+				line-height: 1.6;
+			}
+
+			.field-group {
+				margin-bottom: 18px;
+			}
+
+			label {
+				display: block;
+				margin-bottom: 8px;
+				font-size: 0.92rem;
+				color: #cbd5e1;
+			}
+
+			.password-input-wrap {
+				position: relative;
+			}
+
+			.password-hint {
+				position: relative;
+				position: absolute;
+				right: 12px;
+				top: 50%;
+				transform: translateY(-50%);
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 28px;
+				height: 28px;
+				border-radius: 999px;
+				border: 1px solid rgba(148, 163, 184, 0.35);
+				background: rgba(15, 23, 42, 0.55);
+				color: #e2e8f0;
+				cursor: help;
+				font-size: 0.95rem;
+				font-weight: 700;
+				line-height: 1;
+			}
+
+			.password-hint-text {
+				position: absolute;
+				right: 0;
+				top: calc(100% + 10px);
+				width: max-content;
+				max-width: 260px;
+				padding: 10px 12px;
+				border-radius: 12px;
+				background: rgba(15, 23, 42, 0.96);
+				border: 1px solid rgba(56, 189, 248, 0.35);
+				color: #e2e8f0;
+				font-size: 0.82rem;
+				line-height: 1.5;
+				box-shadow: 0 14px 30px rgba(2, 6, 23, 0.3);
+				opacity: 0;
+				visibility: hidden;
+				transform: translateY(-4px);
+				transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+				pointer-events: none;
+				z-index: 2;
+			}
+
+			.password-hint:hover .password-hint-text,
+			.password-hint:focus-visible .password-hint-text {
+				opacity: 1;
+				visibility: visible;
+				transform: translateY(0);
+			}
+
+			.password-hint:focus-visible {
+				outline: 2px solid rgba(56, 189, 248, 0.8);
+				outline-offset: 2px;
+			}
+
+			input {
+				width: 100%;
+				padding: 15px 16px;
+				border-radius: 14px;
+				border: 1px solid rgba(148, 163, 184, 0.28);
+				background: rgba(15, 23, 42, 0.7);
+				color: var(--text);
+				outline: none;
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.password-input-wrap input {
+				padding-right: 54px;
+			}
+
+			input::placeholder {
+				color: #64748b;
+			}
+
+			input:focus {
+				border-color: rgba(56, 189, 248, 0.8);
+				box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+			}
+
+			.row {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 16px;
+				margin: 10px 0 22px;
+				font-size: 0.92rem;
+			}
+
+			.remember {
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				color: #cbd5e1;
+			}
+
+			.remember input {
+				width: 18px;
+				height: 18px;
+				margin: 0;
+				accent-color: var(--accent);
+			}
+
+			.forgot {
+				color: var(--accent);
+				text-decoration: none;
+			}
+
+			.forgot:hover {
+				color: #7dd3fc;
+			}
+
+			.primary-btn {
+				width: 100%;
+				border: none;
+				border-radius: 14px;
+				padding: 15px 18px;
+				background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+				color: white;
+				font-size: 1rem;
+				font-weight: 700;
+				cursor: pointer;
+				box-shadow: 0 16px 30px rgba(14, 165, 233, 0.24);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.primary-btn:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 18px 34px rgba(14, 165, 233, 0.32);
+			}
+
+
+			.signup {
+				margin-top: 26px;
+				text-align: center;
+				color: var(--muted);
+			}
+
+			.signup a {
+				color: var(--accent);
+				text-decoration: none;
+				font-weight: 700;
+			}
+
+			.signup a:hover {
+				color: #7dd3fc;
+			}
+
+			@media (max-width: 860px) {
+				.login-shell {
+					grid-template-columns: 1fr;
+				}
+
+				.hero {
+					min-height: 340px;
+				}
+
+				.login-card {
+					border-left: none;
+					border-top: 1px solid var(--panel-border);
+				}
+			}
+
+			@media (max-width: 540px) {
+				body {
+					padding: 12px;
+				}
+
+				.hero,
+				.login-card {
+					padding: 28px 20px;
+				}
+
+				.row {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<main class="login-shell">
+			<section class="hero" aria-label="Login page introduction">
+				<div class="brand">
+					<div class="brand-mark" aria-hidden="true"></div>
+					<span>Pulse Access</span>
+				</div>
+
+				<div class="hero-copy">
+					<h1>Welcome back.</h1>
+					<p>
+						Sign in to continue where you left off, keep your settings in sync, and access your dashboard in one place.
+					</p>
+					<div class="hero-badges" aria-label="Highlights">
+						<span class="badge">Fast login</span>
+						<span class="badge">Secure session</span>
+						<span class="badge">Mobile friendly</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="login-card" aria-label="Sign in form">
+				<h2>Sign in</h2>
+				<p class="subtitle">Use your email and password to access your account.</p>
+
+				<form>
+					<div class="field-group">
+						<label for="email">Email</label>
+						<input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+					</div>
+
+					<div class="field-group">
+							<label for="password">Password</label>
+							<div class="password-input-wrap">
+								<input id="password" type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+								<button class="password-hint" type="button" aria-label="Password requirements" title="Password requirements: at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.">
+									?
+									<span class="password-hint-text">Use at least 8 characters, including 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.</span>
+								</button>
+							</div>
+					</div>
+
+					<div class="row">
+						<label class="remember">
+							<input type="checkbox" name="remember">
+							Remember me
+						</label>
+						<a class="forgot" href="#">Forgot password?</a>
+					</div>
+
+					<button class="primary-btn" id="submit" type="button" onclick="onSubmit()">Login</button>
+
+				</form>
+			</section>
+		</main>
+	</body>
+	<script>
+
+		function onSubmit() {
+			const username = document.getElementById("email").value.trim();
+			const password = document.getElementById("password").value.trim();
+			const submitButton = document.getElementById("submit");
+
+			if (!username || !password) {
+				alert("Please enter both username and password");
+				return;
+			}
+
+			if (submitButton.innerHTML === "Sign Up") {
+				localStorage.setItem(username, password);
+				alert("Account created successfully");
+				submitButton.innerHTML = "Login";
+				return;
+			}
+
+			const savedPassword = localStorage.getItem(username);
+
+			if (savedPassword === null) {
+				alert("User not found");
+				submitButton.innerHTML = "Sign Up";
+				return;
+			}
+
+			if (password === savedPassword) {
+				alert("Successful login");
+				window.location.href = "chessGrid.html";
+				return;
+			}
+
+			alert("Incorrect password");
+		}
+
+	</script>
+	</html>
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Effect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .parallax {
+            height: 100vh;
+            background-image: url('https://i.redd.it/7c77m6bw4k1d1.jpeg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .parallax::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .parallax-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .parallax-content p {
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .section-1 {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.7) 0%, rgba(118, 75, 162, 0.7) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        .section-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .section-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        } 
+
+        .section-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 2rem 0;
+        }
+
+        .section-2 {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.7) 0%, rgba(245, 87, 108, 0.7) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="parallax">
+        <div class="parallax-content">
+            <h1>Parallax Effect</h1>
+            <p>Scroll to explore the parallax experience</p>
+        </div>
+    </div>
+
+    <section class="section-1">
+        <div class="section-content">
+            <h2>Section One</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, itaque quo! Rem nobis repellendus nihil sint quas ab alias veniam? Quasi incidunt, earum enim dolorem ratione repudiandae aut nobis eum.
+            </p>
+        </div>
+    </section>
+
+    <section class="section-2">
+        <div class="section-content">
+            <h2>Section Two</h2>
+            <p>
+                lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, itaque quo! Rem nobis repellendus nihil sint quas ab alias veniam? Quasi incidunt, earum enim dolorem ratione repudiandae aut nobis eum.
+            </p>
+        </div>
+    </section>
+</body>
+</html>

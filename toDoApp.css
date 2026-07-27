@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Inter, sans-serif;
+
+    background:
+        radial-gradient(circle at top left, #7c3aed, transparent 35%),
+        radial-gradient(circle at bottom right, #06b6d4, transparent 35%),
+        #0f172a;
+}
+
+.hero {
+    width: 100%;
+    max-width: 550px;
+
+    padding: 2rem;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 28px;
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.25),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.hero h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+#todo {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+#todo input {
+    flex: 1;
+
+    padding: 14px 18px;
+
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+#todo input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+#todo button {
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 16px;
+
+    background: rgba(255,255,255,0.12);
+    color: white;
+
+    backdrop-filter: blur(12px);
+
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+#todo button:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+#tasks {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#tasks li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 16px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(16px);
+}
+
+#tasks li span {
+    flex: 1;
+    color: white;
+    overflow-wrap: anywhere;
+}
+
+#tasks li input {
+    flex: 1;
+
+    padding: 10px 12px;
+
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background: rgba(255,255,255,0.08);
+    color: white;
+    outline: none;
+}
+
+#tasks li button {
+    border: none;
+    border-radius: 12px;
+
+    padding: 8px 14px;
+
+    background: rgba(255,255,255,0.12);
+    color: white;
+
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#tasks li button:hover {
+    background: rgba(255,255,255,0.2);
+}
